@@ -227,9 +227,11 @@
 					<p class="intro-text"></p>
 					<div id="main" style="background-image: none;">
 							<h3 class="text-center">WELCOME</h3>
-								<div class="mb-3"><label class="form-label" id="lbl-usuario" for="txt-usuario" style="color: white;">Email</label><input class="form-control" type="email" id="txt-usuario" style="font-style: italic;"></div>
-								<div class="mb-3"><label class="form-label" id="lbl-password" for="txt-password" style="color: white;">Password</label><input class="form-control" type="password" id="txt-password" style="font-style: italic;"></div>
-							<button class="btn btn-primary" id="btn-sesion"  style="background-color:  #01d38f;border-color: var(--bs-btn-color);border-radius: 15px;">LOG IN</button>
+								<div class="mb-3"><label class="form-label" id="lbl-usuario" for="txt-usuario" style="color: white;">Email</label>
+									<input class="form-control" type="email" id="email1" name="email1" style="font-style: italic;"></div>
+								<div class="mb-3"><label class="form-label" id="lbl-password" for="txt-password" style="color: white;">Password</label>
+									<input class="form-control" type="password" id="password1" style="font-style: italic;"></div>
+							<button class="btn btn-primary" id="btn-sesion"  style="background-color:  #01d38f;border-color: var(--bs-btn-color);border-radius: 15px;" onclick="trylogin()">LOG IN</button>
 							<p></p>
 							<p  style="font-style: italic; color: white;">You Don't have account ?&nbsp;<a id="tosignup" href="#" style="color:#01d38f;font-size: 19px; font-weight: bold;">Sign up</a></p>
 						</div>
@@ -308,10 +310,10 @@
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="js/main.js"></script>
- 
 
 
   <script>
+	
 	const loginLink = document.getElementById('login-link');
 	const tosignup = document.getElementById('tosignup');
 	const tologin = document.getElementById('tologin');
@@ -356,10 +358,46 @@
 	  signup.style.display = 'none';
 	});
 
+	function trylogin() {
+    const email = document.getElementById("email1").value;
+    const password = document.getElementById("password1").value;
+
+    const loginUrl = `http://127.0.0.1:8000/login/${email}/${password}`;
+    const adminLoginUrl = `http://127.0.0.1:8000/adminlogin/${email}/${password}`;
+
+    fetch(loginUrl)
+      .then(response => response.json())
+      .then(data => {
+        if (data.success === true) {
+        
+          console.log("Login successful!");
+        } else {
+        
+          fetch(adminLoginUrl)
+            .then(response => response.json())
+            .then(data => {
+              if (data.success === true) {
+                console.log("Admin login successful!");
+              } else {
+                console.log("Login failed.");
+              }
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
 
 
 
   </script>
+
+
+
   </body>
 </html>
