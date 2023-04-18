@@ -2,8 +2,6 @@ from django.shortcuts import render
 
 from django.http import JsonResponse
 from .models import user
-from .models import admin
-from django.views.decorators.csrf import csrf_exempt
 
 def show_all_users(request):
     users = user.objects.all()
@@ -17,36 +15,30 @@ def show_all_users(request):
 
 
 
-@csrf_exempt
-def login(request, email, password):
-    try:
-        # Attempt to retrieve the user with the given email
-        user_obj = user.objects.get(email=email)
-    except user.DoesNotExist:
-        # If the user doesn't exist, return an error response
-        return JsonResponse({"success": False})
 
-    # Check if the password is correct
-    if user_obj.password == password:
-        # If the password is correct, return a success response
-        return JsonResponse({"success": True, })
-    else:
-        # If the password is incorrect, return an error response
-        return JsonResponse({"success": False, })
-    
-@csrf_exempt
-def adminlogin(request, email, password):
-    try:
-        # Attempt to retrieve the user with the given email
-        admin_obj = admin.objects.get(email=email)
-    except admin.DoesNotExist:
-        # If the user doesn't exist, return an error response
-        return JsonResponse({"success": False})
+def login(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user_obj = user.objects.filter(email=email, password=password).first()
 
-    # Check if the password is correct
-    if admin_obj.password == password:
-        # If the password is correct, return a success response
-        return JsonResponse({"success": True, })
+        if user_obj:
+            # user found, return user object
+            data = {
+                'id': user_obj.id,
+                'fname': user_obj.fname,
+                'lname': user_obj.lname,
+                'email': user_obj.email,
+                'telephone': user_obj.telephone,
+                'is_admin': user_obj.is_admin,
+            }
+            return JsonResponse(data)
+        else:
+            # user not found
+            return JsonResponse({'error': 'Invalid email or password.'})
     else:
-        # If the password is incorrect, return an error response
-        return JsonResponse({"success": False, })
+        # request method is not POST
+        return JsonResponse({'error': 'Invalid request method.'})
+
+
+

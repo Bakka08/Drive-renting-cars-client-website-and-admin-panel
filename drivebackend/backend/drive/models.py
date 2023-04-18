@@ -6,13 +6,7 @@ class user(models.Model):
     email = models.CharField(max_length=50)
     telephone = models.CharField(max_length=15)
     password = models.CharField(max_length=20)
-
-
-class admin(models.Model):
-    code = models.CharField(max_length=10)
-    email = models.CharField(max_length=50)
-    password = models.CharField(max_length=20)
-
+    is_admin = models.BooleanField(False)
 
 class voiture(models.Model):
     mark = models.CharField(max_length=50)
@@ -45,6 +39,7 @@ class reservation(models.Model):
     utilisateur = models.ForeignKey(user, on_delete=models.CASCADE)
     date_debut = models.DateField()
     date_fin = models.DateField()
+    pikeup_date = models.CharField(max_length=50)
     
 
 
