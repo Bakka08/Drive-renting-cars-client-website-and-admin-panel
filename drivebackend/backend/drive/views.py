@@ -1,7 +1,9 @@
-from django.shortcuts import render
-
 from django.http import JsonResponse
 from .models import user
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from django.contrib.auth import get_user_model
 
 def show_all_users(request):
     users = user.objects.all()
@@ -13,32 +15,35 @@ def show_all_users(request):
 
 
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import user
 
-
-
+@csrf_exempt
 def login(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user_obj = user.objects.filter(email=email, password=password).first()
+    if request.method == 'GET':
+        email = request.GET.get('email', None)
+        password = request.GET.get('password', None)
 
-        if user_obj:
-            # user found, return user object
-            data = {
-                'id': user_obj.id,
-                'fname': user_obj.fname,
-                'lname': user_obj.lname,
-                'email': user_obj.email,
-                'telephone': user_obj.telephone,
-                'is_admin': user_obj.is_admin,
-            }
-            return JsonResponse(data)
-        else:
-            # user not found
-            return JsonResponse({'error': 'Invalid email or password.'})
-    else:
-        # request method is not POST
-        return JsonResponse({'error': 'Invalid request method.'})
+        if email and password:
+            try:
+                user_obj = user.objects.get(email=email, password=password)
+                user_data = {
+                    'fname': user_obj.fname,
+                    'lname': user_obj.lname,
+                    'email': user_obj.email,
+                    'telephone': user_obj.telephone,
+                    'is_admin': user_obj.is_admin,
+                }
+                return JsonResponse(user_data, status=200)
+            except user.DoesNotExist:
+                return JsonResponse({'message': 'User not found'}, status=404)
+
+        return JsonResponse({'message': 'Email and password are required'}, status=400)
+
+    return JsonResponse({'message': 'Only GET requests are allowed'}, status=405)
+
+
 
 
 
