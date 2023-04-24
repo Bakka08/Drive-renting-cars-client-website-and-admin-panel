@@ -46,4 +46,35 @@ def login(request):
 
 
 
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import user  
+
+class signup(APIView):
+    def post(self, request):
+        # retrieve data from the request body
+        fname = request.data.get('fname')
+        lname = request.data.get('lname')
+        email = request.data.get('email')
+        telephone = request.data.get('telephone')
+        password = request.data.get('password')
+        is_admin = request.data.get('is_admin', False)
+
+        # create a new User object
+        new_user = user(
+            fname=fname,
+            lname=lname,
+            email=email,
+            telephone=telephone,
+            password=password,
+            is_admin=is_admin
+        )
+
+        # save the user object to the database
+        new_user.save()
+
+        # return a success response
+        return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
+
 

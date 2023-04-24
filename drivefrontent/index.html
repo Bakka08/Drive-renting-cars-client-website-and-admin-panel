@@ -75,12 +75,12 @@
 			  <div class="text w-100 text-center mb-md-5 pb-md-5">
 				<h1 class="mb-4">Fast &amp; Easy Way To Rent A Car</h1>
 				<p style="font-size: 18px;">Hit the road with confidence and style, and make every mile count with our premium car rental service.</p>
-				<a class="icon-wrap  d-flex align-items-center mt-4 justify-content-center">
-				  <div class="icon d-flex align-items-center justify-content-center">
+				<a id="login-link2" href="#" class="icon-wrap  d-flex align-items-center mt-4 justify-content-center">
+				  <div  class="icon d-flex align-items-center justify-content-center">
 					<span class="ion-ios-play"></span>
 				  </div>
 				  <div class="heading-title ml-5">
-					<span >Easy steps for renting a car</span>
+					<span >Logout</span>
 				  </div>
 				</a>
 			  </div>
@@ -287,13 +287,13 @@
 					<div id="main" style="background-image: none;">
 							<h3 class="text-center">Register</h3>
 						
-								<div class="mb-3"><label class="form-label" id="lbl-usuario" for="txt-usuario"style="color: white;">First Name</label><input class="form-control" type="text" id="txt-usuario" style="font-style: italic; "></div>
-								<div class="mb-3"><label class="form-label" id="lbl-usuario-3" for="txt-usuario"style="color: white;">Last Name</label><input class="form-control" type="text" id="txt-usuario-3" style="font-style: italic;"></div>
-								<div class="mb-3"><label class="form-label" id="lbl-usuario-2" for="txt-usuario"style="color: white;">Email</label><input class="form-control" type="text" id="txt-usuario-2" style="font-style: italic;"></div>
-								<div class="mb-3"><label class="form-label" id="lbl-usuario-1" for="txt-usuario"style="color: white;">Telephone</label><input class="form-control" type="text" id="txt-usuario-1" style="font-style: italic;"></div>
-								<div class="mb-3"><label class="form-label" id="lbl-password" for="txt-password"style="color: white;">Password</label><input class="form-control" type="password" id="txt-password" style="font-style: italic;"></div>
-								<div class="mb-3"><label class="form-label" id="lbl-password-1" for="txt-password"style="color: white;">Confirm Password</label><input class="form-control" type="password" id="txt-password-1" style="font-style: italic;"></div>
-							<button class="btn btn-primary" id="btn-sesion" style="color:  #01d38f;--bs-primary-rgb: 37,109,180;background: #01d38f;border-color: var(--bs-btn-color);border-radius: 15px;">Sign up&nbsp;</button>
+								<div class="mb-3"><label class="form-label" id="lbl-usuario" for="txt-usuario"style="color: white;">First Name</label><input class="form-control" type="text" id="fnamee" style="font-style: italic; "></div>
+								<div class="mb-3"><label class="form-label" id="lbl-usuario-3" for="txt-usuario"style="color: white;">Last Name</label><input class="form-control" type="text" id="lnamee" style="font-style: italic;"></div>
+								<div class="mb-3"><label class="form-label" id="lbl-usuario-2" for="txt-usuario"style="color: white;">Email</label><input class="form-control" type="text" id="emaile" style="font-style: italic;"></div>
+								<div class="mb-3"><label class="form-label" id="lbl-usuario-1" for="txt-usuario"style="color: white;">Telephone</label><input class="form-control" type="text" id="telephonee" style="font-style: italic;"></div>
+								<div class="mb-3"><label class="form-label" id="lbl-password" for="txt-password"style="color: white;">Password</label><input class="form-control" type="password" id="password1e" style="font-style: italic;"></div>
+								<div class="mb-3"><label class="form-label" id="lbl-password-1" for="txt-password"style="color: white;">Confirm Password</label><input class="form-control" type="password" id="password2e" style="font-style: italic;"></div>
+							<button class="btn btn-primary" id="btn-sesion" style="color:  #01d38f;--bs-primary-rgb: 37,109,180;background: #01d38f;border-color: var(--bs-btn-color);border-radius: 15px;" onclick="createUser()">Sign up&nbsp;</button>
 							<p></p>
 							<p  style="font-style: italic;color: white;">You already have account &nbsp;?&nbsp;<a id="tologin" href="#" style="color: #01d38f;font-size: 19px;font-weight: bold;">Login</a></p>
 						</div>
@@ -336,6 +336,7 @@
   <script>
 	
 	const loginLink = document.getElementById('login-link');
+	const loginLink2 = document.getElementById('login-link2');
 	const tosignup = document.getElementById('tosignup');
 	const tologin = document.getElementById('tologin');
 	const herowrap= document.querySelector('.hero-wrap');
@@ -361,6 +362,20 @@
 	  signup.style.display = 'none';
 	  section1.style.display = 'none'
 	  section2.style.display = 'none'
+	});
+
+	loginLink2.addEventListener('click', (event) => {
+	  event.preventDefault();
+	  herowrap.style.display = 'none';
+	  section.style.display = 'none';
+	  counter.style.display = 'none';
+	  fotter.style.display = 'none';
+	  about.style.display ='none';
+	  login.style.display = 'block';
+	  signup.style.display = 'none';
+	  section1.style.display = 'none'
+	  section2.style.display = 'none'
+	  selection.style.display = 'none'
 	});
 
 	tosignup.addEventListener('click', (event) => {
@@ -420,6 +435,8 @@ loginButton.addEventListener('click', async () => {
     console.log('User is an admin!');
     
   } else {
+	document.getElementById("password1").value = "";
+	document.getElementById("email1").value = "";
 	herowrap.style.display = 'block';
 	section.style.display = 'none';
 	counter.style.display = 'block';
@@ -433,7 +450,52 @@ loginButton.addEventListener('click', async () => {
   }
 });
 
+function createUser() {
+        // retrieve input values
+        const fname = document.getElementById('fnamee').value;
+        const lname = document.getElementById('lnamee').value;
+        const email = document.getElementById('emaile').value;
+        const telephone = document.getElementById('telephonee').value;
+        const password1 = document.getElementById('password1e').value;
+        const password2 = document.getElementById('password2e').value;
 
+        // validate input values
+        if (!fname || !lname || !email || !telephone || !password1|| !password2) {
+          alert('Please fill in all fields.');
+          return;
+        }
+		if (password1 !== password2) {
+    		alert('Passwords do not match.');
+    		return;
+  }
+
+        // send data to API
+        fetch('http://localhost:8000/signup/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            fname: fname,
+            lname: lname,
+            email: email,
+            telephone: telephone,
+            password: password1,
+            is_admin: false
+          })
+        })
+        .then(response => {
+          if (response.ok) {
+            alert('User created successfully.');
+          } else {
+            alert('Failed to create user.');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('An error occurred while creating the user.');
+        });
+      }
   </script>
 
 
