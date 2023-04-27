@@ -486,7 +486,13 @@ function createUser() {
         })
         .then(response => {
           if (response.ok) {
-            alert('User created successfully.');
+			herowrap.style.display = 'none';
+				section.style.display = 'none';
+				counter.style.display = 'none';
+				fotter.style.display = 'none';
+				login.style.display = 'block';
+				signup.style.display = 'none';
+				section2.style.display = 'none'
           } else {
             alert('Failed to create user.');
           }
