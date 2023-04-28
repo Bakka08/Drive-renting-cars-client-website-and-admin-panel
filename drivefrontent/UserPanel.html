@@ -89,41 +89,64 @@
 		  </div>
 		</div>
 	  </div>
-	  
+
+	  <section class="ftco-section bg-light" id="list" style="display:none;" >
+    	<div class="container" >
+    		<div class="row" id="add-list">
+    			<div class="col-md-4">
+    				<div class="car-wrap rounded ftco-animate" style="background-color: #303841;">
+    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
+    					</div>
+    					<div class="text">
+    						<h2 class="mb-0"  style="color: white;">Mercedes Grand Sedan</h2>
+							<span class="cat"  style="color: white;">Cheverolet</span>
+    						<div class="d-flex mb-3">
+
+	    						<p class="price ml-1">$500 <span style="color: white;">/day</span></p>
+								<p class="price ml-auto">$500 <span style="color: white;">/Your trip </span></p>
+    						</div>
+    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
+    					</div>
+    				</div>
+    		    </div>
+    	
+    	</div>
+    </section>
+	
 	  <section class="ftco-section ftco-no-pt bg-light" style="display:none;" id="selection">
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-md-12	featured-top">
     				<div class="row no-gutters">
 	  					<div class="col-md-4 d-flex align-items-center">
-	  						<form action="#" class="request-form ftco-animate bg-primary">
+	  						<div  class="request-form ftco-animate bg-primary">
 		          		<h2>Make your trip</h2>
 			    				<div class="form-group">
 			    					<label for="" class="label">Pick-up location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<input type="text" class="form-control" placeholder="City" id="city1">
 			    				</div>
 			    				<div class="form-group">
 			    					<label for="" class="label">Drop-off location</label>
-			    					<input type="text" class="form-control" placeholder="City, Airport, Station, etc">
+			    					<input type="text" class="form-control" placeholder="City" id="city2">
 			    				</div>
 			    				<div class="d-flex">
 			    					<div class="form-group mr-2">
 			                <label for="" class="label">Pick-up date</label>
-			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date">
+			                <input type="text" class="form-control" id="book_pick_date" placeholder="Date" >
 			              </div>
 			              <div class="form-group ml-2">
 			                <label for="" class="label">Drop-off date</label>
-			                <input type="text" class="form-control" id="book_off_date" placeholder="Date">
+			                <input type="text" class="form-control" id="book_off_date" placeholder="Date" ">
 			              </div>
 		              </div>
 		              <div class="form-group">
 		                <label for="" class="label">Pick-up time</label>
-		                <input type="text" class="form-control" id="time_pick" placeholder="Time">
+		                <input type="text" class="form-control" id="time_pick" placeholder="Time" ">
 		              </div>
 			            <div class="form-group">
-			              <input type="submit" value="Rent A Car Now" class="btn btn-secondary py-3 px-4">
+			              <button onclick="search()" class="btn btn-secondary py-3 px-4">Rent A Car Now</button>
 			            </div>
-			    			</form>
+					</div>
 	  					</div>
 	  					<div class="col-md-8 d-flex align-items-center">
 	  						<div class="services-wrap rounded-right w-100">
@@ -224,7 +247,7 @@
         </div>
     	</div>
     </section>
-	<footer class="ftco-footer ftco-bg-dark ftco-section">
+	<footer class="ftco-footer ftco-bg-dark ftco-section" style="background-color: #303841;">
 		<div class="container">
   
 		  <div class="row">
@@ -351,7 +374,7 @@
 	const section1 = document.getElementById('section1');
 	const section2 = document.getElementById('section2');
 	const selection = document.getElementById('selection')
-  
+	const list = document.getElementById("list");
 	loginLink.addEventListener('click', (event) => {
 	  event.preventDefault();
 	  herowrap.style.display = 'none';
@@ -361,8 +384,9 @@
 	  about.style.display ='none';
 	  login.style.display = 'block';
 	  signup.style.display = 'none';
-	  section1.style.display = 'none'
-	  section2.style.display = 'none'
+	  section1.style.display = 'none';
+	  section2.style.display = 'none';
+	  list.style.display = 'none';
 	});
 
 	loginLink2.addEventListener('click', (event) => {
@@ -374,9 +398,10 @@
 	  about.style.display ='none';
 	  login.style.display = 'block';
 	  signup.style.display = 'none';
-	  section1.style.display = 'none'
-	  section2.style.display = 'none'
-	  selection.style.display = 'none'
+	  section1.style.display = 'none';
+	  section2.style.display = 'none';
+	  selection.style.display = 'none';
+	  list.style.display = 'none';
 	});
 
 	tosignup.addEventListener('click', (event) => {
@@ -387,7 +412,8 @@
 	  fotter.style.display = 'none';
 	  login.style.display = 'none';
 	  signup.style.display = 'block';
-	  section2.style.display = 'none'
+	  section2.style.display = 'none';
+	  list.style.display = 'none';
 	});
 
 	
@@ -400,6 +426,7 @@
 	  login.style.display = 'block';
 	  signup.style.display = 'none';
 	  section2.style.display = 'none'
+	  list.style.display = 'none';
 	});
 
 
@@ -445,9 +472,10 @@ loginButton.addEventListener('click', async () => {
 	about.style.display ='block';
 	login.style.display = 'none';
 	signup.style.display = 'none';
-	section1.style.display = 'none'
-	section2.style.display = 'block'
-	selection.style.display = 'block'
+	section1.style.display = 'none';
+	section2.style.display = 'block';
+	selection.style.display = 'block';
+	list.style.display = 'none';
   }
 });
 
@@ -494,6 +522,7 @@ function createUser() {
 				login.style.display = 'block';
 				signup.style.display = 'none';
 				section2.style.display = 'none'
+				list.style.display = 'none';
           } else {
             alert('Failed to create user.');
           }
@@ -503,6 +532,76 @@ function createUser() {
           alert('An error occurred while creating the user.');
         });
       }
+
+
+function search() {
+  // Read input values
+  const city1 = document.getElementById("city1").value;
+  const city2 = document.getElementById("city2").value;
+  const date1 = formatDate(document.getElementById("book_pick_date").value);
+  const date2 = formatDate(document.getElementById("book_off_date").value);
+  const time = document.getElementById("time_pick").value;
+
+    // Check that all input values are not empty
+	if (!city1 || !city2 || !date1 || !date2 || !time) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+   // Check that date1 is not later than date2
+   if (new Date(date1) > new Date(date2)) {
+    alert("Pick-up date must be before drop-off date.");
+    return;
+  }
+
+  // Construct API endpoint URL
+  const url = `http://localhost:8000/search/?date1=${date1}&date2=${date2}`;
+
+  // Send GET request to API endpoint
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+		herowrap.style.display = 'block';
+	section.style.display = 'none';
+	counter.style.display = 'none';
+	fotter.style.display = 'block';
+	about.style.display ='none';
+	login.style.display = 'none';
+	signup.style.display = 'none';
+	section1.style.display = 'none';
+	section2.style.display = 'block';
+	selection.style.display = 'none';
+	list.style.display = 'block';
+
+
+
+	
+      console.log(data);
+    })
+    .catch(error => {
+      // Handle error
+      console.error(error);
+    });
+}
+
+function formatDate(dateString) {
+  // Parse input date string to Date object
+  const date = new Date(dateString);
+
+  // Format date in yyyy-mm-dd format
+  const year = date.getFullYear();
+  const month = padZeroes(date.getMonth() + 1, 2);
+  const day = padZeroes(date.getDate(), 2);
+  return `${year}-${month}-${day}`;
+}
+
+function padZeroes(number, length) {
+  // Helper function to pad zeroes to a number
+  return number.toString().padStart(length, "0");
+}
+
+
+
   </script>
 
 
