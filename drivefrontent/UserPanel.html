@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="index.css">
 	
   </head>
   <body>
@@ -317,11 +318,108 @@
 			</div>
 		  </div>
 	
-	
+	<div id="popup" class="popup" >
+		<div class="container">
+			<button class="close-btn" onclick="closepop()">X</button>
+<section class="ftco-section ftco-car-details">
+      <div class="container">
+      	<div class="row justify-content-center">
+      		<div class="col-md-12">
+      			<div class="car-details">
+      				<div class="img rounded" style="background-image: url(images/bg_1.jpg);"></div>
+      				<div class="text text-center">
+      					<span class="subheading">Cheverolet</span>
+      					<h2>Mercedes Grand Sedan</h2>
+      				</div>
+      			</div>
+      		</div>
+      	</div>
+      	<div class="row">
+      		<div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-dashboard"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Mileage
+		                	<span>40,000</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-pistons"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Transmission
+		                	<span>Manual</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-car-seat"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Seats
+		                	<span>5 Adults</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-backpack"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Luggage
+		                	<span>4 Bags</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+          <div class="col-md d-flex align-self-stretch ftco-animate">
+            <div class="media block-6 services">
+              <div class="media-body py-md-4">
+              	<div class="d-flex mb-3 align-items-center">
+	              	<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-diesel"></span></div>
+	              	<div class="text">
+		                <h3 class="heading mb-0 pl-3">
+		                	Fuel
+		                	<span>Petrol</span>
+		                </h3>
+	                </div>
+                </div>
+              </div>
+            </div>      
+          </div>
+      	</div>
+      	
+      </div>
+    </section>
+</div>
+
 	</div>
 
 
-
+	
     
   
 
@@ -601,7 +699,6 @@ function padZeroes(number, length) {
 }
 
 function generateCarHTML(car) {
-	console.log(car)
   return `
     <div style="width: 33.33%; float: left; padding: 10px;">
       <div style="background-color: #fff; border-radius: 10px; box-shadow: 0 3px 20px rgba(0,0,0,0.2);">
@@ -612,10 +709,12 @@ function generateCarHTML(car) {
           <span style="color: black;">${car[1]}</span>
           <div style="margin: 10px 0;">
             <p class="price" style="margin: 0; color: #188cfc;">$${car[9]} <span style="color: black;">/day</span></p>
-            <p class="price" style="margin: 0; color: #188cfc;">$${car[0]*10} <span style="color: black;">/Your trip </span></p>
+            <p class="price" style="margin: 0; color: #188cfc;">$${car[9]*10} <span style="color: black;">/Your trip </span></p>
           </div>
-          <p style="margin: 0;"><a href="#" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Book now</a> <a href="car-single.html" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;">Details</a></p>
-        </div>
+		  <p style="margin: 0;">
+		<button style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Book now</button>
+		<button onclick="details('${car[0]}' , '${car[1]}', '${car[2]}', '${car[3]}', '${car[4]}', '${car[5]}', '${car[6]}', '${car[7]}', '${car[8]}', '${car[9]}')" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;">Details</button>
+	</p>        </div>
       </div>
     </div>
   `;
@@ -634,9 +733,42 @@ function displayCars(data) {
   }
   carHTML += '</div>';
   carHTML += '</div>';
-  console.log(carHTML)
+  
   carContainer.innerHTML = carHTML;
 }
+
+	
+
+function details(id, mark, type, image, mileage, transmission, seats, luggage, fuel, price) {
+  
+  var popup = document.getElementById("popup");
+  popup.style.display = "block";
+  var img = popup.querySelector(".img");
+  var subheading = popup.querySelector(".subheading");
+  var h2 = popup.querySelector("h2");
+  var mileageSpan = popup.querySelector(".mileage span");
+  var transmissionSpan = popup.querySelector(".transmission span");
+  var seatsSpan = popup.querySelector(".seats span");
+  var luggageSpan = popup.querySelector(".luggage span");
+  var fuelSpan = popup.querySelector(".fuel span");
+  // Update the content of the popup with the passed data
+  img.style.backgroundImage = "url(" + image + ")";
+  subheading.textContent = mark;
+  h2.textContent = type;
+  mileageSpan.textContent = mileage;
+  transmissionSpan.textContent = transmission;
+  seatsSpan.textContent = seats;
+  luggageSpan.textContent = luggage;
+  fuelSpan.textContent = fuel;
+  
+}
+
+
+function closepop() {
+  var popup = document.getElementById("popup");
+  popup.style.display = "none";
+}
+
 
 
 
