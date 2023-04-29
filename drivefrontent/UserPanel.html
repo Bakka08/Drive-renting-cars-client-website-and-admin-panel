@@ -91,26 +91,12 @@
 	  </div>
 
 	  <section class="ftco-section bg-light" id="list" style="display:none;" >
-    	<div class="container" >
-    		<div class="row" id="add-list">
-    			<div class="col-md-4">
-    				<div class="car-wrap rounded ftco-animate" style="background-color: #303841;">
-    					<div class="img rounded d-flex align-items-end" style="background-image: url(images/car-1.jpg);">
-    					</div>
-    					<div class="text">
-    						<h2 class="mb-0"  style="color: white;">Mercedes Grand Sedan</h2>
-							<span class="cat"  style="color: white;">Cheverolet</span>
-    						<div class="d-flex mb-3">
-
-	    						<p class="price ml-1">$500 <span style="color: white;">/day</span></p>
-								<p class="price ml-auto">$500 <span style="color: white;">/Your trip </span></p>
-    						</div>
-    						<p class="d-flex mb-0 d-block"><a href="#" class="btn btn-primary py-2 mr-1">Book now</a> <a href="car-single.html" class="btn btn-secondary py-2 ml-1">Details</a></p>
-    					</div>
-    				</div>
-    		    </div>
     	
-    	</div>
+    		
+    			
+    
+    	
+		
     </section>
 	
 	  <section class="ftco-section ftco-no-pt bg-light" style="display:none;" id="selection">
@@ -358,7 +344,9 @@
 
 
   <script>
-	
+	 let searchData;
+	  let apiData;
+
 	const loginLink = document.getElementById('login-link');
 	const loginLink2 = document.getElementById('login-link2');
 	const tosignup = document.getElementById('tosignup');
@@ -534,6 +522,8 @@ function createUser() {
       }
 
 
+	 
+
 function search() {
   // Read input values
   const city1 = document.getElementById("city1").value;
@@ -542,14 +532,14 @@ function search() {
   const date2 = formatDate(document.getElementById("book_off_date").value);
   const time = document.getElementById("time_pick").value;
 
-    // Check that all input values are not empty
-	if (!city1 || !city2 || !date1 || !date2 || !time) {
+  // Check that all input values are not empty
+  if (!city1 || !city2 || !date1 || !date2 || !time) {
     alert("Please fill in all required fields.");
     return;
   }
 
-   // Check that date1 is not later than date2
-   if (new Date(date1) > new Date(date2)) {
+  // Check that date1 is not later than date2
+  if (new Date(date1) > new Date(date2)) {
     alert("Pick-up date must be before drop-off date.");
     return;
   }
@@ -561,7 +551,19 @@ function search() {
   fetch(url)
     .then(response => response.json())
     .then(data => {
-		herowrap.style.display = 'block';
+      
+      searchData = {
+        city1: city1,
+        city2: city2,
+        date1: date1,
+        date2: date2,
+        time: time,
+      };
+	  apiData = data.cars.map(car => Object.values(car)); // transform cars objects to an array with each car as a line
+
+	 
+
+	herowrap.style.display = 'block';
 	section.style.display = 'none';
 	counter.style.display = 'none';
 	fotter.style.display = 'block';
@@ -572,17 +574,15 @@ function search() {
 	section2.style.display = 'block';
 	selection.style.display = 'none';
 	list.style.display = 'block';
-
-
-
-	
-      console.log(data);
+	displayCars(apiData);
     })
     .catch(error => {
       // Handle error
       console.error(error);
     });
+	
 }
+
 
 function formatDate(dateString) {
   // Parse input date string to Date object
@@ -599,6 +599,45 @@ function padZeroes(number, length) {
   // Helper function to pad zeroes to a number
   return number.toString().padStart(length, "0");
 }
+
+function generateCarHTML(car) {
+	console.log(car)
+  return `
+    <div style="width: 33.33%; float: left; padding: 10px;">
+      <div style="background-color: #fff; border-radius: 10px; box-shadow: 0 3px 20px rgba(0,0,0,0.2);">
+        <div style="height: 200px; background-size: cover; background-position: center; border-radius: 10px 10px 0 0; background-image: url(${car[3]});">
+        </div>
+        <div style="padding: 20px;">
+          <h2 style="margin: 0; font-size: 24px;">${car[2]}</h2>
+          <span style="color: black;">${car[1]}</span>
+          <div style="margin: 10px 0;">
+            <p class="price" style="margin: 0; color: #188cfc;">$${car[9]} <span style="color: black;">/day</span></p>
+            <p class="price" style="margin: 0; color: #188cfc;">$${car[0]*10} <span style="color: black;">/Your trip </span></p>
+          </div>
+          <p style="margin: 0;"><a href="#" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Book now</a> <a href="car-single.html" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;">Details</a></p>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+ 
+function displayCars(data) {
+  if (!data) {
+    return;
+  }
+  const carContainer = document.getElementById("list");
+  let carHTML = '<div class="container" >';
+	carHTML += '<div class="row">';
+  for (let i = 0; i < data.length; i++) {
+    carHTML += generateCarHTML(data[i]);
+  }
+  carHTML += '</div>';
+  carHTML += '</div>';
+  console.log(carHTML)
+  carContainer.innerHTML = carHTML;
+}
+
 
 
 
