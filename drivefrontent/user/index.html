@@ -827,7 +827,8 @@ function search() {
 	login.style.display = 'none';
 	signup.style.display = 'none';
 	section1.style.display = 'none';
-	section2.style.display = 'block';
+	section2.style.display = 'none';
+	section3.style.display = 'block';
 	selection.style.display = 'none';
 	list.style.display = 'block';
 	displayCars(apiData);
@@ -860,18 +861,18 @@ function generateCarHTML(car) {
   return `
     <div style="width: 33.33%; float: left; padding: 10px;">
       <div style="background-color: #fff; border-radius: 10px; box-shadow: 0 3px 20px rgba(0,0,0,0.2);">
-        <div style="height: 200px; background-size: cover; background-position: center; border-radius: 10px 10px 0 0; background-image: url(${car[3]});">
+        <div style="height: 200px; background-size: cover; background-position: center; border-radius: 10px ; background-image: url(${car[3]});">
         </div>
         <div style="padding: 20px;">
           <h2 style="margin: 0; font-size: 24px;">${car[2]}</h2>
           <span style="color: black;">${car[1]}</span>
           <div style="margin: 10px 0;">
-            <p class="price" style="margin: 0; color: #188cfc;">$${car[9]} <span style="color: black;">/day</span></p>
-            <p class="price" style="margin: 0; color: #188cfc;">$${car[9]*10} <span style="color: black;">/Your trip </span></p>
+            <p class="price" style="margin: 0; color: #188cfc;">${car[9]}Dh <span style="color: black;">/day</span></p>
+            <p class="price" style="margin: 0; color: #188cfc;">${car[9]*10}Dh <span style="color: black;">/Your trip </span></p>
           </div>
 		  <p style="margin: 0;">
-		<button style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;">Book now</button>
-		<button onclick="details('${car[0]}' , '${car[1]}', '${car[2]}', '${car[3]}', '${car[4]}', '${car[5]}', '${car[6]}', '${car[7]}', '${car[8]}', '${car[9]}')" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;">Details</button>
+		<button style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;" class="btn btn-primary py-2 mr-1">Book now</button>
+		<button onclick="details('${car[0]}' , '${car[1]}', '${car[2]}', '${car[3]}', '${car[4]}', '${car[5]}', '${car[6]}', '${car[7]}', '${car[8]}', '${car[9]}')" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;" class="btn btn-secondary py-2 ml-1">Details</button>
 	</p>        </div>
       </div>
     </div>
