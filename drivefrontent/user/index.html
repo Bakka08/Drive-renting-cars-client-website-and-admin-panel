@@ -84,7 +84,7 @@
 					<span >Logout</span>
 				  </div>
 				</a>
-				<a id="settings" href="#" class="icon-wrap  d-flex align-items-center mt-4 justify-content-center" >
+				<a id="settings-link" href="#" class="icon-wrap  d-flex align-items-center mt-4 justify-content-center" >
 					<div  class="icon d-flex align-items-center justify-content-center" style="background-color	: #F7D060;">
 					  <span class="ion-ios-settings" ></span>
 					</div>
@@ -100,6 +100,30 @@
 		</div>
 	  </div>
 
+	  <div class="hero-wrap ftco-degree-bg" style="background-image: url('images/bg_1.jpg');display: none;" data-stellar-background-ratio="0.5" id="section3" >
+		<div class="overlay"></div>
+		<div class="container">
+		  <div class="row no-gutters slider-text justify-content-start align-items-center justify-content-center">
+			<div class="col-lg-8 ftco-animate">
+			  <div class="text w-100 text-center mb-md-5 pb-md-5">
+				<h1 class="mb-4">Fast &amp; Easy Way To Rent A Car</h1>
+				<p style="font-size: 18px;">Hit the road with confidence and style, and make every mile count with our premium car rental service.</p>
+				<a id="back-link" href="#" class="icon-wrap  d-flex align-items-center mt-4 justify-content-center" >
+				  <div  class="icon d-flex align-items-center justify-content-center" style="background-color	: #007bff;">
+					<span class="ion-ios-arrow-back"></span>
+				</div>
+				  <div class="heading-title ml-5">
+					<span >go back</span>
+				  </div>
+				</a>
+			
+				
+				
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </div>
 	  
 
 	  <section class="ftco-section bg-light" id="list" style="display:none;" >
@@ -241,6 +265,85 @@
         </div>
     	</div>
     </section>
+
+	<section class="ftco-section contact-section" id="profile" style="display: none;">
+		<div class="container">
+		  <div class="row d-flex mb-5 contact-info">
+			  <div class="col-md-4">
+				  <div class="row mb-5">
+  
+					  <div class="col-md-12">
+						  <div class="border w-100 p-4 rounded mb-2 d-flex">
+							  <div class="icon mr-3">
+								  <span class="icon-user"></span>
+							  </div>
+							<p><span>Full name:</span> <a id="fname3"></a></p>
+						  </div>
+					  </div>
+  
+					
+					  
+					<div class="col-md-12">
+						<div class="border w-100 p-4 rounded mb-2 d-flex">
+							<div class="icon mr-3">
+								<span class="icon-envelope-o"></span>
+							</div>
+						  <p><span>Email:</span> <a id="email3">/a></p>
+						</div>
+					</div>
+  
+					<div class="col-md-12">
+						<div class="border w-100 p-4 rounded mb-2 d-flex">
+							<div class="icon mr-3">
+								<span class="icon-mobile-phone"></span>
+							</div>
+						  <p><span>Phone:</span> <a id="phone3"></a></p>
+						</div>
+					</div>
+				  
+					<div class="col-md-12">
+					  <div class="border w-100 p-4 rounded mb-2 d-flex">
+						  <div class="icon mr-3">
+							  <span class="icon-envelope-o"></span>
+						  </div>
+						<p><span>Password:</span> <a>***************</a></p>
+					  </div>
+				  </div>
+				  
+				  </div>
+				  <button id="m_btn" class="btn btn-primary py-3 px-5" style="width: inherit;" onclick="displayProfile()">Modify profile</button>
+				</div>
+			<div class="col-md-8 block-9 mb-md-5" id="updatelist" style="display: none;">
+			 
+				  <div class="form-group">
+					<input type="text" class="form-control" id="input_fname" placeholder="Your First Name">
+				  </div>
+				  <div class="form-group">
+					  <input type="text" class="form-control" id="input_lname" placeholder="Your Last Name">
+					</div>
+				  <div class="form-group">
+					<input type="text" class="form-control" id="input_email" placeholder="Your Email">
+				  </div>
+				  <div class="form-group">
+					  <input type="text" class="form-control" id="input_telephone" placeholder="Your Telephone">
+					</div>
+				  <div class="form-group">
+					  <input type="text" class="form-control" id="input_oldpass" placeholder="Your old Password">
+				  </div>
+				  <div class="form-group">
+					<input type="text" class="form-control" id="input_newpass" placeholder="Your new  Password">
+				</div>
+				<div class="form-group">
+					<input type="text" class="form-control" id="input_confnewpass" placeholder="confirm Your new Password">
+				</div>
+				<button type="button" class="btn btn-primary py-3 px-5" style="width: inherit;" onclick="updateUser()">Update</button>
+	   
+		  </div>
+	 
+		</div>
+	  </section>
+	  
+
 	<footer class="ftco-footer ftco-bg-dark ftco-section" style="background-color: #303841;">
 		<div class="container">
   
@@ -451,6 +554,7 @@
   <script>
 	 let searchData;
 	  let apiData;
+	  let conn_user;
 
 	const loginLink = document.getElementById('login-link');
 	const loginLink2 = document.getElementById('login-link2');
@@ -466,8 +570,11 @@
 	const signup = document.getElementById('signup');
 	const section1 = document.getElementById('section1');
 	const section2 = document.getElementById('section2');
-	const selection = document.getElementById('selection')
+	const selection = document.getElementById('selection');
 	const list = document.getElementById("list");
+	const settings = document.getElementById("settings-link");
+	const section3 = document.getElementById("section3");
+	const back = document.getElementById("back-link");
 	loginLink.addEventListener('click', (event) => {
 	  event.preventDefault();
 	  herowrap.style.display = 'none';
@@ -521,8 +628,45 @@
 	  section2.style.display = 'none'
 	  list.style.display = 'none';
 	});
+const profile = document.getElementById("profile")
+	settings.addEventListener('click', (event) => {
+	  event.preventDefault();
+	  herowrap.style.display = 'none';
+	  section.style.display = 'none';
+	  counter.style.display = 'none';
+	  fotter.style.display = 'block';
+	  about.style.display ='none';
+	  login.style.display = 'none';
+	  signup.style.display = 'none';
+	  section1.style.display = 'none';
+	  section2.style.display = 'none';
+	  selection.style.display = 'none';
+	  list.style.display = 'none';
+	  section3.style.display = "block"
+	  profile.style.display="block"
+	  
+	});
 
+	back.addEventListener('click', (event) => {
+	 	herowrap.style.display = 'block';
+	section.style.display = 'none';
+	counter.style.display = 'block';
+	fotter.style.display = 'block';
+	about.style.display ='block';
+	login.style.display = 'none';
+	signup.style.display = 'none';
+	section1.style.display = 'none';
+	section2.style.display = 'block';
+	selection.style.display = 'block';
+	list.style.display = 'none';
+	section3.style.display = "none"
+	profile.style.display="none"
+	document.getElementById("updatelist").style.display = "none";
+	document.getElementById("m_btn").style.display = "block";
 
+	});
+
+	
 
 const emailInput = document.getElementById('email1');
 const passwordInput = document.getElementById('password1');
@@ -556,6 +700,9 @@ loginButton.addEventListener('click', async () => {
     console.log('User is an admin!');
     
   } else {
+	conn_user = userData;
+	
+
 	document.getElementById("password1").value = "";
 	document.getElementById("email1").value = "";
 	herowrap.style.display = 'block';
@@ -569,8 +716,12 @@ loginButton.addEventListener('click', async () => {
 	section2.style.display = 'block';
 	selection.style.display = 'block';
 	list.style.display = 'none';
+	document.getElementById('fname3').textContent = conn_user.fname + ' ' + conn_user.lname;
+	document.getElementById('email3').textContent = conn_user.email;
+	document.getElementById('phone3').textContent = conn_user.telephone;
   }
 });
+
 
 function createUser() {
         // retrieve input values
@@ -778,8 +929,88 @@ function closepop() {
 
 
 
+function displayProfile() {
+let fname = document.getElementById("input_fname").value=conn_user.fname;
+let lname = document.getElementById("input_lname").value=conn_user.lname;
+let email = document.getElementById("input_email").value=conn_user.email;
+let telephone = document.getElementById("input_telephone").value=conn_user.telephone;
+  document.getElementById("updatelist").style.display = "block";
+  document.getElementById("m_btn").style.display = "none";
+}
+
+	function updateUser() {
+			// Get the user ID from the URL
+			var user_id = conn_user.id;
+
+			// Get the updated user data from the input fields
+			var updated_data = {
+				'fname': document.getElementById('input_fname').value,
+				'lname': document.getElementById('input_lname').value,
+				'email': document.getElementById('input_email').value,
+				'telephone': document.getElementById('input_telephone').value,
+				'password': document.getElementById('input_newpass').value,
+				
+			};
+			if (document.getElementById('input_oldpass').value !== conn_user.password) {
+   				alert('Please enter your current password correctly.');
+   				return;
+				}
+			if (document.getElementById('input_newpass').value !== document.getElementById('input_confnewpass').value) {
+    			alert('New password and confirm password do not match.');
+    			return;
+				}
+
+				if (document.getElementById('input_newpass').value === '') {
+    				alert('New password cannot be empty.');
+    				return;
+					}
+
+				if (document.getElementById('input_newpass').value !== document.getElementById('input_confnewpass').value) {
+    				alert('New password and confirm password do not match.');
+    				return;
+					}
 
 
+			fetch('http://localhost:8000/update/' + user_id + '/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(updated_data),
+	})
+
+			.then(function(response) {
+				if (response.ok) {
+					alert('updated successfully!');
+					conn_user.fname=document.getElementById('input_fname').value;
+					conn_user.lname=document.getElementById('input_lname').value;
+					conn_user.email=document.getElementById('input_email').value;
+					conn_user.telephone=document.getElementById('input_telephone').value;
+					conn_user.password=document.getElementById('input_newpass').value;
+					herowrap.style.display = 'block';
+					section.style.display = 'none';
+					counter.style.display = 'block';
+					fotter.style.display = 'block';
+					about.style.display ='block';
+					login.style.display = 'none';
+					signup.style.display = 'none';
+					section1.style.display = 'none';
+					section2.style.display = 'block';
+					selection.style.display = 'block';
+					list.style.display = 'none';
+					section3.style.display = "none"
+					profile.style.display="none"
+					document.getElementById("updatelist").style.display = "none";
+					document.getElementById("m_btn").style.display = "block";
+					document.getElementById('fname3').textContent = conn_user.fname + ' ' + conn_user.lname;
+					document.getElementById('email3').textContent = conn_user.email;
+					document.getElementById('phone3').textContent = conn_user.telephone;
+
+				} else {
+					alert('Failed to update .');
+				}
+			});
+		}
   </script>
 
 

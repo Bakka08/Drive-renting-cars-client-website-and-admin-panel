@@ -7,9 +7,10 @@ from django.contrib.auth import get_user_model
 
 def show_all_users(request):
     users = user.objects.all()
+   
     data = {"users": []}
     for u in users:
-        user_data = {"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone}
+        user_data = {"id": u.id,"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone}
         data["users"].append(user_data)
     return JsonResponse(data)
 
@@ -29,10 +30,12 @@ def login(request):
             try:
                 user_obj = user.objects.get(email=email, password=password)
                 user_data = {
+                    'id': user_obj.id,
                     'fname': user_obj.fname,
                     'lname': user_obj.lname,
                     'email': user_obj.email,
                     'telephone': user_obj.telephone,
+                    'password': user_obj.password,
                     'is_admin': user_obj.is_admin,
                 }
                 return JsonResponse(user_data, status=200)
@@ -115,3 +118,27 @@ def search(request):
     data = {'cars': available_cars}
 
     return JsonResponse(data)
+
+
+from django.shortcuts import get_object_or_404
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import user
+
+@api_view(['POST'])
+def update(request, user_id):
+    
+    user_obj = get_object_or_404(user, pk=user_id)
+
+    user_obj.fname = request.data.get('fname', user_obj.fname)
+    user_obj.lname = request.data.get('lname', user_obj.lname)
+    user_obj.email = request.data.get('email', user_obj.email)
+    user_obj.telephone = request.data.get('telephone', user_obj.telephone)
+    user_obj.password = request.data.get('password', user_obj.password)
+    
+
+    
+    user_obj.save()
+
+    
+    return Response({'message': 'User updated successfully.'})
