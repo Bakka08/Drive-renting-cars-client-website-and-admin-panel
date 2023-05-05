@@ -55,7 +55,7 @@ MySQL
 
 Selenium
 
-# class diagram
+# Class diagram
 
 
 # Database cars:
@@ -109,5 +109,6 @@ for car in cars:
 
 using the json :
 ```python
+![alt text](./git-images/Screenshot_2.png)
 
 ```
