@@ -1,27 +1,44 @@
-# Pokedex App
-This is a Java-based Pokedex app that uses the HTTP API to display information about Pokemon.
+# Renting Cars Web Site
+This is a web site for renting cars. The site has both a client side and an admin side. 
+The client side is where users can browse available cars, make reservations, and view their account information. 
+The admin side is where site administrators can manage cars, reservations, and user accounts.
 
-The app features a search section where users can search for a Pokemon by name, and upon clicking a Pokemon, a new layout is displayed showing its details, such as weight, height, and stats including HP, attack, defense, and speed. The image of the Pokemon is displayed as a GIF.
+# Client Side Features
 
-The app is simple and easy to use.
+User registration and login: Clients can sign up for a new account on the site, or log in if they already have an account. This feature will allow users to save their reservations and preferences.
 
-# Preview
+Search by dates and location: Clients can search for available cars based on their desired pick-up and return dates and location. This feature will allow clients to easily find cars that meet their needs.
 
-![Alt Text](Animation.gif)
+View car details: Clients can view detailed information about each car, including its make, model, features, and availability. This feature will help clients make informed decisions when choosing a car to rent.
 
-# Features:
+Make a reservation: Clients can reserve a car by selecting their desired pick-up and return dates and location. This feature will allow clients to lock in their rental and ensure that the car is available when they need it.
 
-List of all Pokemon with their names and images.
+Modify user profile: Clients can modify their user profile information, such as their name, email, and password. This feature will allow clients to keep their account information up-to-date.
 
-Search bar to search for Pokemon by name.
+View and manage reservations: Clients can view a list of their reservations and modify or cancel them if needed. This feature will allow clients to keep track of their rental history and make changes as necessary.
 
-Details page for each Pokemon showing their weight, height, and stats (HP, attack, defense, speed).
+Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 
-Animated GIF image for each Pokemon.
+# Admin Side Features
+Dashboard with charts: The admin side will have a dashboard with charts and graphs to display important metrics, such as the number of reservations, revenue, and user activity. This feature will help the admin team get a quick overview of the site's performance.
 
-Pagination to load more Pokemon as the user scrolls.
+User login/logout: Admins can log in to the admin side with their username and password, and log out when they are finished using the site. This feature will ensure that only authorized users can access the admin side.
 
+Modify admin profile: Admins can modify their own profile information, such as their name, email, and password. This feature will allow admins to keep their account information up-to-date.
 
+Ban/unban a user: Admins can ban or unban a user if necessary. This feature will help the admin team maintain the integrity of the site and prevent abusive or fraudulent behavior.
+
+View user list: Admins can view a list of all registered users on the site, including their contact information and account status. This feature will help the admin team manage user accounts and respond to user inquiries.
+
+View cars list: Admins can view a list of all cars available for rent, including their make, model, and availability status. This feature will help the admin team manage the site's inventory and ensure that all cars are in good condition.
+
+View orders list: Admins can view a list of all reservations made by clients, including the client's name, the car rented, and the reservation status. This feature will help the admin team keep track of rental history and ensure that all reservations are properly managed.
+
+Change order status: Admins can change the status of a reservation from pending to approved or rejected, based on the availability of the car and other factors. This feature will help ensure that clients receive timely responses to their reservation requests.
+
+Update a car: Admins can update the details of a car, such as its make, model, features, and availability. This feature will allow the admin team to keep the site's inventory up-to-date.
+
+Delete a car: Admins can delete a car from the site if necessary, such as if the car is no longer available or in poor condition. This feature will help ensure that clients only see cars that are currently available for rent.
 # Technologies 
 
 
