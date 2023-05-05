@@ -108,7 +108,4 @@ for car in cars:
 ```
 
 using the json :
-```python
 ![alt text](./git-images/Screenshot_2.png)
-
-```
