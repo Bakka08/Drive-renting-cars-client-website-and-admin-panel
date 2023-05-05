@@ -19,7 +19,7 @@ View and manage reservations: Clients can view a list of their reservations and 
 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 
-![alt text](./git-images/screen-capture.webm)
+![alt text](./git-images/screen-capture1.mp4)
 # Admin Side Features
 Dashboard with charts: The admin side will have a dashboard with charts and graphs to display important metrics, such as the number of reservations, revenue, and user activity. This feature will help the admin team get a quick overview of the site's performance.
 
@@ -40,6 +40,8 @@ Change order status: Admins can change the status of a reservation from pending 
 Update a car: Admins can update the details of a car, such as its make, model, features, and availability. This feature will allow the admin team to keep the site's inventory up-to-date.
 
 Delete a car: Admins can delete a car from the site if necessary, such as if the car is no longer available or in poor condition. This feature will help ensure that clients only see cars that are currently available for rent.
+
+![alt text](./git-images/screen-capture2.mp4)
 # Technologies Used
 
 HTML
