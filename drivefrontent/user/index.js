@@ -2,6 +2,15 @@
 let searchData;
  let apiData;
  let conn_user;
+ 
+function md5Hash(str) {
+  return CryptoJS.MD5(str).toString();
+}
+
+
+ 
+
+
 
 const loginLink = document.getElementById('login-link');
 const loginLink2 = document.getElementById('login-link2');
@@ -132,7 +141,7 @@ alert('Email and password are required.');
 return;
 }
 
-const response = await fetch(`http://localhost:8000/login/?email=${email}&password=${password}`);
+const response = await fetch(`http://localhost:8000/login/?email=${email}&password=${md5Hash(password)}`);
 
 
 const userData = await response.json();
@@ -140,13 +149,10 @@ const userData = await response.json();
 if (response.status === 404) {
 console.log('User not found.');
 return;
+}else if(userData.banned == true){
+alert("account is banned");
 }
-
-
-if (userData.is_admin) {
-console.log('User is an admin!');
-
-} else {
+ else {
 conn_user = userData;
 
 
@@ -200,8 +206,8 @@ function createUser() {
        lname: lname,
        email: email,
        telephone: telephone,
-       password: password1,
-       is_admin: false
+       password: md5Hash(password1),
+       is_admin: false,
      })
    })
    .then(response => {
@@ -493,3 +499,5 @@ function updateUser() {
     });
   }
   
+
+

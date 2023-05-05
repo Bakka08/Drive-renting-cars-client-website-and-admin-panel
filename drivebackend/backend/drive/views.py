@@ -37,6 +37,7 @@ def login(request):
                     'telephone': user_obj.telephone,
                     'password': user_obj.password,
                     'is_admin': user_obj.is_admin,
+                    'banned': user_obj.banned,
                 }
                 return JsonResponse(user_data, status=200)
             except user.DoesNotExist:
@@ -63,6 +64,7 @@ class signup(APIView):
         telephone = request.data.get('telephone')
         password = request.data.get('password')
         is_admin = request.data.get('is_admin', False)
+        banned = request.data.get('banned', False)
 
         
         new_user = user(
@@ -71,7 +73,8 @@ class signup(APIView):
             email=email,
             telephone=telephone,
             password=password,
-            is_admin=is_admin
+            is_admin=is_admin,
+            banned=banned
         )
 
         
