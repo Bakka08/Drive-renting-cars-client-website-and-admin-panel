@@ -39,44 +39,71 @@ Change order status: Admins can change the status of a reservation from pending 
 Update a car: Admins can update the details of a car, such as its make, model, features, and availability. This feature will allow the admin team to keep the site's inventory up-to-date.
 
 Delete a car: Admins can delete a car from the site if necessary, such as if the car is no longer available or in poor condition. This feature will help ensure that clients only see cars that are currently available for rent.
-# Technologies 
+# Technologies Used
+
+HTML
+
+CSS
+
+JavaScript
+
+Bootstrap
+
+Django
+
+MySQL
+
+Selenium
+
+# class diagram
 
 
-Android SDK: Provides the foundation for the app's user interface and behavior.
+# Database cars:
+Database cars
+We have scraped data from the car rental website https://www.discovercars.com/fr using Python and Selenium. The data has been saved as a JSON file. We then used this JSON data to populate our MySQL database with car information.
 
-Java: Used as the primary programming language for the app's logic.
+The car data includes the car name, number of seats, number of luggage, number of doors, whether the car is air-conditioned or manual, and the price. We have created a Django model for the car object and used Django's built-in ORM to create and manipulate data in our MySQL database.
 
-Picasso: A powerful image loading and caching library that helps to display Pokemon images in the app.
+With the car data now stored in our database, users can search for cars based on location and dates, and reserve a car for their desired time period. Admins can manage the car inventory by adding, updating, and deleting car information as needed.
+```python
+import json
 
-AppCompat: Provides a consistent user interface across different versions of Android.
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+options = webdriver.ChromeOptions()
+options.add_experimental_option("detach", True)
+website = 'https://www.discovercars.com/fr/search/b8550f2d-18a4-4825-980f-1c1d4bfe7b54'
+path = 'Users/Yagami/Downloads/Chromedriver'
+driver = webdriver.Chrome(options=options,executable_path=path)
+driver.get(website)
+all_matches_button = driver.find_element(By.XPATH, "//a[@class='button button-block show-more-cars trigger-gtm-sr']")
+all_matches_button.click()
+all_matches_button.click()
+all_matches_button.click()
+try:
+    cars=driver.find_elements(By.XPATH,"//div[@class='car-box']")
+except:
+    cars = driver.find_elements(By.XPATH, "//div[@class='car-box no-show']")
+data = []
+data2 = []
+for car in cars:
+    try:
+        image=car.find_element(By.XPATH,".// img[@class='lazy-load loaded']").get_attribute('data-src')
+    except:
+        image=car.find_element(By.XPATH,".// img[@class='lazy-load']").get_attribute('data-src')
+    items={
+        'nom': car.find_element(By.XPATH,".//div [@class='car-name text-24 text-bold']").text,
+        'nbr_places': car.find_element(By.XPATH,".//ul [@class='dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500']/li[1]").text,
+        'nbr_bagage': car.find_element(By.XPATH,".//ul [@class='dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500']/li[2]").text,
+        'nbr_portes': car.find_element(By.XPATH,".//ul [@class='dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500']/li[3]").text,
+        'climatise ou pas': car.find_element(By.XPATH,".//ul [@class='dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500']/li[4]").text,
+        'manuelle ou pas': car.find_element(By.XPATH,".//ul [@class='dc-list dc-list-icon dc-list-md text-14 dc-list-horizontal dc-list-mt-8 car-params mt-8 text-gray-500']/li[5]").text,
+        'prix': car.find_element(By.XPATH,".//div [@class='price-item-price-main']").text,
+        'image': image
+    }
+    print(items)
+    data.append(items)
+    with open('data.json','w') as f:
+        json.dump(data,f)
+```
 
-ConstraintLayout: Allows developers to create complex layouts in a flexible and efficient way.
-
-JUnit: A testing framework used for unit testing in the app.
-
-Espresso: A testing framework used for UI testing in the app.
-
-CardView: Provides a Material Design card-like layout for displaying Pokemon details.
-
-Legacy Support Library: Provides backwards compatibility for older versions of Android.
-
-Glide: A fast and efficient image loading and caching library used to display Pokemon images in the app.
-
-# API Used
-This app does not use an external API. Instead, it uses a JSON file (available at https://raw.githubusercontent.com/Biuni/PokemonGO-Pokedex/master/pokedex.json) to store information about the Pokemon. 
-
-This allows the app to work offline and without relying on an external service.
-
-# Getting started:
-
-Clone or download the repository for your Pokedex app.
-
-Open the project in Android Studio.
-
-Run the app on an emulator or physical device.
-
-The list of Pokemon should be displayed on the main screen.
-
-Use the search bar to search for a Pokemon by name.
-
-Click on a Pokemon to view its details on a new screen.
