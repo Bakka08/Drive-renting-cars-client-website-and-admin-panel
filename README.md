@@ -19,6 +19,7 @@ View and manage reservations: Clients can view a list of their reservations and 
 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 
+![alt text](./git-images/screen-capture.webm)
 # Admin Side Features
 Dashboard with charts: The admin side will have a dashboard with charts and graphs to display important metrics, such as the number of reservations, revenue, and user activity. This feature will help the admin team get a quick overview of the site's performance.
 
