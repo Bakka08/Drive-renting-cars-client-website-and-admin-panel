@@ -10,7 +10,7 @@ def show_all_users(request):
    
     data = {"users": []}
     for u in users:
-        user_data = {"id": u.id,"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone, "is_admin": u.is_admin}
+        user_data = {"id": u.id,"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone, "is_admin": u.is_admin, "banned": u.banned, "password":u.password}
         data["users"].append(user_data)
     return JsonResponse(data)
 
@@ -170,50 +170,49 @@ def car_list(request):
             data.append(item)
         return JsonResponse(data, safe=False)
 
-
-from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import voiture
 
 @csrf_exempt
 def update_car(request, car_id):
-    car = get_object_or_404(voiture, pk=car_id)
+    if request.method == 'PUT':
+        car = get_object_or_404(voiture, pk=car_id)
 
-    # update the car object based on request data
-    car.mark = request.POST.get('mark', car.mark)
-    car.type = request.POST.get('type', car.type)
-    car.image = request.POST.get('image', car.image)
-    car.Mileage = request.POST.get('Mileage', car.Mileage)
-    car.Transmission = request.POST.get('Transmission', car.Transmission)
-    car.Seats = request.POST.get('Seats', car.Seats)
-    car.Luggage = request.POST.get('Luggage', car.Luggage)
-    car.Fuel = request.POST.get('Fuel', car.Fuel)
-    car.price = request.POST.get('price', car.price)
+        # update the car object based on request data
+        car.mark = request.POST.get('mark', car.mark)
+        car.type = request.POST.get('type', car.type)
+        car.image = request.POST.get('image', car.image)
+        car.Mileage = request.POST.get('Mileage', car.Mileage)
+        car.Transmission = request.POST.get('Transmission', car.Transmission)
+        car.Seats = request.POST.get('Seats', car.Seats)
+        car.Luggage = request.POST.get('Luggage', car.Luggage)
+        car.Fuel = request.POST.get('Fuel', car.Fuel)
+        car.price = request.POST.get('price', car.price)
 
-    car.save()
+        car.save()
 
-    # return updated car object as JSON response
-    data = {
-        'id': car.id,
-        'mark': car.mark,
-        'type': car.type,
-        'image': car.image,
-        'Mileage': car.Mileage,
-        'Transmission': car.Transmission,
-        'Seats': car.Seats,
-        'Luggage': car.Luggage,
-        'Fuel': car.Fuel,
-        'price': car.price
-    }
-    return JsonResponse(data)
+        # return updated car object as JSON response
+        data = {
+            'id': car.id,
+            'mark': car.mark,
+            'type': car.type,
+            'image': car.image,
+            'Mileage': car.Mileage,
+            'Transmission': car.Transmission,
+            'Seats': car.Seats,
+            'Luggage': car.Luggage,
+            'Fuel': car.Fuel,
+            'price': car.price
+        }
+        return JsonResponse(data)
+    
+
 
 
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from .models import voiture
 @csrf_exempt
-def deletecar(request, car_id):
+def delete_car(request, car_id):
     car = get_object_or_404(voiture, pk=car_id)
     car.delete()
     data = {'message': 'Car deleted successfully!'}
@@ -280,3 +279,73 @@ def import_data(request):
         )
 
     return JsonResponse({'message': 'Data added successfully.'})
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status
+from .models import reservation
+
+@api_view(['POST'])
+def update_reservation_status(request):
+    reservation_id = request.data.get('id', None)
+    new_status = request.data.get('status', None)
+    if not reservation_id or not new_status:
+        return Response({'error': 'Both id and status fields are required.'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        reservation_obj = reservation.objects.get(id=reservation_id)
+        reservation_obj.status = new_status
+        reservation_obj.save()
+        return Response({'message': 'Reservation status updated successfully.'}, status=status.HTTP_200_OK)
+    except reservation.DoesNotExist:
+        return Response({'error': 'Reservation not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import user
+
+class ToggleBannedView(APIView):
+    def post(self, request, pk):
+        try:
+            user_obj = user.objects.get(pk=pk)
+        except user.DoesNotExist:
+            return Response({"error": "User does not exist"}, status=status.HTTP_404_NOT_FOUND)
+
+        user_obj.banned = not user_obj.banned
+        user_obj.save()
+
+        return Response({"status": "success", "banned": user_obj.banned}, status=status.HTTP_200_OK)
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import reservation
+
+@csrf_exempt
+def create_reservation(request):
+    if request.method == 'POST':
+        data = request.POST
+        voiture_id = data.get('voiture_id')
+        utilisateur_id = data.get('utilisateur_id')
+        location_debut = data.get('location_debut')
+        location_fin = data.get('location_fin')
+        date_debut = data.get('date_debut')
+        date_fin = data.get('date_fin')
+        pickup_date = data.get('pickup_date')
+        status = data.get('status')
+
+        reservation_obj = reservation.objects.create(
+            voiture_id=voiture_id,
+            utilisateur_id=utilisateur_id,
+            location_debut=location_debut,
+            location_fin=location_fin,
+            date_debut=date_debut,
+            date_fin=date_fin,
+            pickup_date=pickup_date,
+            status=status
+        )
+        return JsonResponse({'success': True, 'reservation_id': reservation_obj.id})
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid Request Method'})

@@ -7,6 +7,7 @@ class user(models.Model):
     telephone = models.CharField(max_length=15)
     password = models.CharField(max_length=20)
     is_admin = models.BooleanField(False)
+    banned = models.BooleanField(False)
 
 class voiture(models.Model):
     mark = models.CharField(max_length=50)
