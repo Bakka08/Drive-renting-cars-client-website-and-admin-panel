@@ -10,7 +10,7 @@ def show_all_users(request):
    
     data = {"users": []}
     for u in users:
-        user_data = {"id": u.id,"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone}
+        user_data = {"id": u.id,"fname": u.fname, "lname": u.lname, "email": u.email, "telephone": u.telephone, "is_admin": u.is_admin}
         data["users"].append(user_data)
     return JsonResponse(data)
 
@@ -142,3 +142,141 @@ def update(request, user_id):
 
     
     return Response({'message': 'User updated successfully.'})
+
+
+
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import voiture
+
+@csrf_exempt
+def car_list(request):
+    if request.method == 'GET':
+        cars = voiture.objects.all()
+        data = []
+        for car in cars:
+            item = {
+                'id': car.id,
+                'mark': car.mark,
+                'type': car.type,
+                'image': car.image,
+                'Mileage': car.Mileage,
+                'Transmission': car.Transmission,
+                'Seats': car.Seats,
+                'Luggage': car.Luggage,
+                'Fuel': car.Fuel,
+                'price': car.price
+            }
+            data.append(item)
+        return JsonResponse(data, safe=False)
+
+
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import voiture
+
+@csrf_exempt
+def update_car(request, car_id):
+    car = get_object_or_404(voiture, pk=car_id)
+
+    # update the car object based on request data
+    car.mark = request.POST.get('mark', car.mark)
+    car.type = request.POST.get('type', car.type)
+    car.image = request.POST.get('image', car.image)
+    car.Mileage = request.POST.get('Mileage', car.Mileage)
+    car.Transmission = request.POST.get('Transmission', car.Transmission)
+    car.Seats = request.POST.get('Seats', car.Seats)
+    car.Luggage = request.POST.get('Luggage', car.Luggage)
+    car.Fuel = request.POST.get('Fuel', car.Fuel)
+    car.price = request.POST.get('price', car.price)
+
+    car.save()
+
+    # return updated car object as JSON response
+    data = {
+        'id': car.id,
+        'mark': car.mark,
+        'type': car.type,
+        'image': car.image,
+        'Mileage': car.Mileage,
+        'Transmission': car.Transmission,
+        'Seats': car.Seats,
+        'Luggage': car.Luggage,
+        'Fuel': car.Fuel,
+        'price': car.price
+    }
+    return JsonResponse(data)
+
+
+from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from .models import voiture
+@csrf_exempt
+def deletecar(request, car_id):
+    car = get_object_or_404(voiture, pk=car_id)
+    car.delete()
+    data = {'message': 'Car deleted successfully!'}
+    return JsonResponse(data)
+
+
+from django.http import JsonResponse
+from .models import reservation
+
+def reservation_list(request):
+    reservations = reservation.objects.select_related('voiture', 'utilisateur').all()
+    data = []
+    for r in reservations:
+        reservation_data = {
+            'id': r.id,
+            'voiture': {
+                'mark': r.voiture.mark,
+                'type': r.voiture.type,
+                'image': r.voiture.image,
+                'mileage': r.voiture.Mileage,
+                'transmission': r.voiture.Transmission,
+                'seats': r.voiture.Seats,
+                'luggage': r.voiture.Luggage,
+                'fuel': r.voiture.Fuel,
+                'price': r.voiture.price
+            },
+            'utilisateur': {
+                'fname': r.utilisateur.fname,
+                'lname': r.utilisateur.lname,
+                'email': r.utilisateur.email,
+                'telephone': r.utilisateur.telephone
+            },
+            'location_debut': r.location_debut,
+            'location_fin': r.location_fin,
+            'date_debut': r.date_debut,
+            'date_fin': r.date_fin,
+            'pikeup_date': r.pikeup_date,
+            'status': r.status
+        }
+        data.append(reservation_data)
+    return JsonResponse({'reservations': data})
+
+import json
+from django.http import JsonResponse
+from .models import voiture
+@csrf_exempt
+def import_data(request):
+    filepath = 'c:/Users/Yagami/Desktop/drive/Database Cars/data.json'
+
+    with open(filepath) as f:
+        data = json.load(f)
+
+    for item in data:
+        v = voiture.objects.create(
+            mark=item['nom'],
+            type="",
+            image=item['image'],
+            Mileage=10000,
+            Transmission=item['Manuelle'],
+            Seats=int(item['nbr_places'].split()[0]),
+            Luggage=int(item['nbr_bagage'].split()[0]),
+            Fuel="petrol",
+            price=float(item['prix']),
+        )
+
+    return JsonResponse({'message': 'Data added successfully.'})

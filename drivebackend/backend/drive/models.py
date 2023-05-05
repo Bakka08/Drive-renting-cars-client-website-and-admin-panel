@@ -18,6 +18,7 @@ class voiture(models.Model):
     Luggage = models.IntegerField()
     Fuel = models.CharField(max_length=20)
     price = models.FloatField()
+   
 
 class reservation(models.Model):
     voiture = models.ForeignKey(voiture, on_delete=models.CASCADE)
@@ -27,6 +28,6 @@ class reservation(models.Model):
     date_debut = models.DateField()
     date_fin = models.DateField()
     pikeup_date = models.CharField(max_length=50)
-    
+    status = models.CharField(max_length=20)
 
 
