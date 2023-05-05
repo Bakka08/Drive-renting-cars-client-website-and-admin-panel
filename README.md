@@ -57,6 +57,7 @@ Selenium
 
 # Class diagram
 
+![alt text](./git-images/image.png)
 
 # Database cars:
 Database cars
@@ -65,6 +66,7 @@ We have scraped data from the car rental website https://www.discovercars.com/fr
 The car data includes the car name, number of seats, number of luggage, number of doors, whether the car is air-conditioned or manual, and the price. We have created a Django model for the car object and used Django's built-in ORM to create and manipulate data in our MySQL database.
 
 With the car data now stored in our database, users can search for cars based on location and dates, and reserve a car for their desired time period. Admins can manage the car inventory by adding, updating, and deleting car information as needed.
+
 ```python
 import json
 

@@ -491,6 +491,18 @@ function updateUser() {
     .then(response => response.json())
     .then(data => {
       alert('Reservation created successfully:', data);
+      herowrap.style.display = 'block';
+section.style.display = 'none';
+counter.style.display = 'block';
+fotter.style.display = 'block';
+about.style.display ='block';
+login.style.display = 'none';
+signup.style.display = 'none';
+section1.style.display = 'none';
+section2.style.display = 'block';
+selection.style.display = 'block';
+list.style.display = 'none';
+section3.style.display='none';
       
     })
     .catch(error => {
