@@ -323,29 +323,43 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import reservation
 
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from .models import reservation
+
 @csrf_exempt
 def create_reservation(request):
     if request.method == 'POST':
-        data = request.POST
+        data = json.loads(request.body)
         voiture_id = data.get('voiture_id')
         utilisateur_id = data.get('utilisateur_id')
         location_debut = data.get('location_debut')
         location_fin = data.get('location_fin')
         date_debut = data.get('date_debut')
         date_fin = data.get('date_fin')
-        pickup_date = data.get('pickup_date')
+        pikeup_date= data.get('pikeup_date')
         status = data.get('status')
 
+        if voiture_id is None:
+            return JsonResponse({'success': False, 'error': 'Missing voiture_id'})
+
+        try:
+            voiture_obj = voiture.objects.get(pk=voiture_id)
+        except voiture.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Invalid voiture_id'})
+
         reservation_obj = reservation.objects.create(
-            voiture_id=voiture_id,
+            voiture=voiture_obj,
             utilisateur_id=utilisateur_id,
             location_debut=location_debut,
             location_fin=location_fin,
             date_debut=date_debut,
             date_fin=date_fin,
-            pickup_date=pickup_date,
+            pikeup_date=pikeup_date,
             status=status
         )
         return JsonResponse({'success': True, 'reservation_id': reservation_obj.id})
     else:
         return JsonResponse({'success': False, 'error': 'Invalid Request Method'})
+

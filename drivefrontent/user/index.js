@@ -305,7 +305,6 @@ return number.toString().padStart(length, "0");
 }
 
 function generateCarHTML(car) {
-  console.log(searchData.city1)
 return `
 <div style="width: 33.33%; float: left; padding: 10px;">
  <div style="background-color: #fff; border-radius: 10px; box-shadow: 0 3px 20px rgba(0,0,0,0.2);">
@@ -319,7 +318,7 @@ return `
        <p class="price" style="margin: 0; color: #188cfc;">${car[9]*10}Dh <span style="color: black;">/Your trip </span></p>
      </div>
      <p style="margin: 0;">
-   <button onclick="createReservation('${car[0]}','${conn_user.id}' ,'${searchData.city1}','${searchData.city2}','${searchData.date1}','${searchData.date1}','${searchData.time}')" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;" class="btn btn-primary py-2 mr-1">Book now</button>
+   <button onclick="createReservation('${car[0]}','${conn_user.id}' ,'${searchData.city1}','${searchData.city2}','${searchData.date1}','${searchData.date2}','${searchData.time}')" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: #fff; border-radius: 5px; text-decoration: none; transition: background-color 0.3s ease;" class="btn btn-primary py-2 mr-1">Book now</button>
    <button onclick="details('${car[0]}' , '${car[1]}', '${car[2]}', '${car[3]}', '${car[4]}', '${car[5]}', '${car[6]}', '${car[7]}', '${car[8]}', '${car[9]}')" style="display: inline-block; padding: 10px 20px; background-color: #fff; color: #007bff; border-radius: 5px; border: 1px solid #007bff; text-decoration: none; transition: background-color 0.3s ease;" class="btn btn-secondary py-2 ml-1">Details</button>
 </p>        </div>
  </div>
@@ -461,7 +460,7 @@ function updateUser() {
        });
    }
 
-   function createReservation(voitureId,utilisateurId ,locationDebut,locationFin,dateDebut,dateFin,pickupDate) {
+   function createReservation(voitureId,utilisateurId ,locationDebut,locationFin,dateDebut,dateFin,pikeup_date) {
     const status = "pending"
   
     const data = {
@@ -471,7 +470,7 @@ function updateUser() {
       location_fin: locationFin,
       date_debut: dateDebut,
       date_fin: dateFin,
-      pickup_date: pickupDate,
+      pikeup_date: pikeup_date,
       status: status
     };
     
