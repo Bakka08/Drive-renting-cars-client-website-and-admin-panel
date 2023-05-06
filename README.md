@@ -20,7 +20,7 @@ View and manage reservations: Clients can view a list of their reservations and 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 # Video Demonstration
 <video width="320" height="240" controls>
-  <source src="git-images/v1" type="video/mp4">
+  <source src="git-images/v1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
@@ -47,7 +47,7 @@ Delete a car: Admins can delete a car from the site if necessary, such as if the
  
  # Video Demonstration
 <video width="320" height="240" controls>
-  <source src="git-images/v1" type="video/mp4">
+  <source src="git-images/v1.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 
