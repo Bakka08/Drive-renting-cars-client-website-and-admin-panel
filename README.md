@@ -18,7 +18,8 @@ Modify user profile: Clients can modify their user profile information, such as 
 View and manage reservations: Clients can view a list of their reservations and modify or cancel them if needed. This feature will allow clients to keep track of their rental history and make changes as necessary.
 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
-# Video Demonstration
+
+# Video Demonstration Client
 
 https://www.youtube.com/watch?v=O5-MSSUwcBo
 
@@ -44,7 +45,7 @@ Update a car: Admins can update the details of a car, such as its make, model, f
 
 Delete a car: Admins can delete a car from the site if necessary, such as if the car is no longer available or in poor condition. This feature will help ensure that clients only see cars that are currently available for rent.
  
- # Video Demonstration
+ # Video Demonstration Admin
 
 https://www.youtube.com/watch?v=y4FPFlBkZrw
 
