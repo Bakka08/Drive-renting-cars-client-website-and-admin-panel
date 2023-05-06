@@ -68,7 +68,7 @@ Selenium: Selenium is a suite of tools for automating web browsers. It allows de
 
 # Class diagram
 
-![alt text](./git-images/image.png)
+![alt text](./git-images/class.png)
 
 # Database cars:
 Database cars
