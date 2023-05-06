@@ -21,7 +21,6 @@ Log out: Clients can log out of their account when they are finished using the s
 # Video Demonstration
 <video width="320" height="240" controls>
   <source src="./git-images/v1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
 </video>
 
 # Admin Side Features
@@ -47,9 +46,9 @@ Delete a car: Admins can delete a car from the site if necessary, such as if the
  
  # Video Demonstration
 <video width="320" height="240" controls>
-  <source src="git-images/v1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+  <source src="./git-images/v1.mp4" type="video/mp4">
 </video>
+
 
 # Technologies Used
 
