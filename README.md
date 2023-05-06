@@ -52,19 +52,19 @@ https://www.youtube.com/watch?v=y4FPFlBkZrw
 
 # Technologies Used
 
-HTML
+HTML: Hypertext Markup Language is a standard markup language used to create web pages. It provides a structure for content such as text, images, videos, and other multimedia.
 
-CSS
+CSS: Cascading Style Sheets is a style sheet language used to describe the presentation of a document written in HTML. It allows developers to control the layout, fonts, colors, and other visual aspects of a web page.
 
-JavaScript
+JavaScript: JavaScript is a high-level programming language used to create interactive web pages. It allows developers to create dynamic and responsive user interfaces, manipulate the content of a web page, and communicate with web servers.
 
-Bootstrap
+Bootstrap: Bootstrap is a popular front-end framework that provides pre-designed CSS and JavaScript components for building responsive and mobile-first web pages and web applications.
 
-Django
+Django: Django is a Python-based web framework that follows the Model-View-Controller (MVC) architectural pattern. It provides a set of tools and libraries for building web applications, including an ORM for database management, a templating engine, and a built-in web server.
 
-MySQL
+MySQL: MySQL is a popular open-source relational database management system. It is used to store and manage data for web applications and other software systems.
 
-Selenium
+Selenium: Selenium is a suite of tools for automating web browsers. It allows developers to write tests that simulate user interaction with a web page, including clicking links, filling out forms, and submitting data.
 
 # Class diagram
 
