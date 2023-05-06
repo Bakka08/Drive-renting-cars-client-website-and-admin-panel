@@ -20,7 +20,7 @@ View and manage reservations: Clients can view a list of their reservations and 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 # Video Demonstration
 
-[![Alt text]](https://www.youtube.com/watch?v=O5-MSSUwcBo)
+[![Youtube link!]](https://www.youtube.com/watch?v=O5-MSSUwcBo)
 
 
 # Admin Side Features
