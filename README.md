@@ -20,7 +20,7 @@ View and manage reservations: Clients can view a list of their reservations and 
 Log out: Clients can log out of their account when they are finished using the site. This feature will help ensure the security of their account information.
 # Video Demonstration
 
-[!Youtube link!](https://www.youtube.com/watch?v=O5-MSSUwcBo)
+[![Alt text](https://img.youtube.com/vi/O5-MSSUwcBo/0.jpg)](https://www.youtube.com/watch?v=O5-MSSUwcBo)
 
 
 # Admin Side Features
@@ -46,7 +46,7 @@ Delete a car: Admins can delete a car from the site if necessary, such as if the
  
  # Video Demonstration
 
-[![Alt text](https://img.youtube.com/vi/O5-MSSUwcBo/0.jpg)](https://www.youtube.com/watch?v=O5-MSSUwcBo)
+
 
 
 # Technologies Used
