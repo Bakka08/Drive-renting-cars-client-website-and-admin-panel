@@ -122,4 +122,4 @@ for car in cars:
 
 Using the json :
 
-![alt text](./git-images/Screenshot_2.png)
+![alt text](./git-images/post.png)
